@@ -7,19 +7,32 @@ use phozzil\io\IOException;
 class MultiServer
 {
     private $listeners; // MultiServerListener[]
+    private $timeout;   // integer
 
-    public function __construct()
+    public function __construct($timeout = 1000)
     {
         $this->listeners = array();
+        $this->setTimeout($timeout);
     }
 
     public function addListener(MultiServerListener $listener)
     {
         $index = array_search($listener, $this->listeners);
         if ($index !== false) {
-            throw new InvalidArgumentException('listener is already added');
+            throw new \InvalidArgumentException('listener is already added');
         }
         $this->listeners[] = $listener;
+    }
+
+    public function setTimeout($timeout)
+    {
+        if (!is_int($timeout)) {
+            throw new \InvalidArgumentException('timeout must be integer');
+        }
+        if ($timeout <= 0) {
+            throw new \InvalidArgumentException('timeout > 0');
+        }
+        $this->timeout = $timeout;
     }
 
     public function start()
@@ -42,7 +55,7 @@ class MultiServer
                     };
                 }
             }
-            $count = stream_select($observedSockets, $write, $expects, 0, 1000);
+            $count = stream_select($observedSockets, null, null, $this->timeout / 1000000, $this->timeout % 1000000);
             if ($count === false) {
                 throw new IOException('stream_select failed');
             }
