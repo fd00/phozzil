@@ -31,7 +31,7 @@ class MultiServerTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      * @dataProvider setTimeoutProvider
-     * @expectedException InvalidArgumentException
+     * @expectedException phozzil\lang\IllegalArgumentException
      */
     public function setTimeoutThrowsException($timeout)
     {
