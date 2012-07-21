@@ -16,8 +16,9 @@ class MultiServerTest extends PHPUnit_Framework_TestCase
      */
     public function setTimeout()
     {
-        $this->instance->setTimeout(1000);
-        $this->assertTrue(true);
+        $this->assertSame(MultiServer::DEFAULT_TIMEOUT, $this->instance->getTimeout());
+        $this->instance->setTimeout(6543210);
+        $this->assertSame(6543210, $this->instance->getTimeout());
     }
 
     static public function setTimeoutProvider()

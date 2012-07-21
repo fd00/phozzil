@@ -16,7 +16,11 @@ class MultiServer
     const DEFAULT_TIMEOUT = 200000;
 
     private $listeners; // MultiServerListener[]
-    private $timeout;   // integer
+
+    /**
+     * @var int 待ち受け処理一回あたりの制限時間
+     */
+    private $timeout;
 
     /**
      * サーバアプリケーションのインスタンスを生成します。
@@ -58,6 +62,15 @@ class MultiServer
             throw new IllegalArgumentException('timeout > 0');
         }
         $this->timeout = $timeout;
+    }
+
+    /**
+     * 待ち受け処理一回あたりの制限時間を取得します。
+     * @return int 待ち受け処理一回あたりの制限時間
+     */
+    public function getTimeout()
+    {
+        return $this->timeout;
     }
 
     /**
