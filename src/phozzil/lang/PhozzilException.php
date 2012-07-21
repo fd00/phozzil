@@ -3,6 +3,6 @@
 namespace phozzil\lang;
 
 /**
- * Phozzil ���œ��������O�̊��ƂȂ�N���X�ł��B
+ * Phozzil 内で投げられる例外の基底となるクラスです。
  */
 class PhozzilException extends \Exception {}

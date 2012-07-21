@@ -3,30 +3,30 @@
 namespace phozzil\net;
 
 /**
- * MultiServer ‚ª”­s‚·‚éƒCƒxƒ“ƒg‚ğó‚¯æ‚é‚½‚ß‚ÌƒCƒ“ƒ^ƒtƒF[ƒX‚Å‚·B
+ * MultiServer ãŒç™ºè¡Œã™ã‚‹ã‚¤ãƒ™ãƒ³ãƒˆã‚’å—ã‘å–ã‚‹ãŸã‚ã®ã‚¤ãƒ³ã‚¿ãƒ•ã‚§ãƒ¼ã‚¹ã§ã™ã€‚
  */
 interface MultiServerListener
 {
     /**
-     * Ú‘±‚³‚ê‚½‚ÉŒÄ‚Ño‚³‚ê‚Ü‚·B
+     * æ¥ç¶šã•ã‚ŒãŸæ™‚ã«å‘¼ã³å‡ºã•ã‚Œã¾ã™ã€‚
      * @param resource $resource
      */
     function onConnect($resource);
 
     /**
-     * ƒf[ƒ^‚ğóM‚µ‚½‚ÉŒÄ‚Ño‚³‚ê‚Ü‚·B
+     * ãƒ‡ãƒ¼ã‚¿ã‚’å—ä¿¡ã—ãŸæ™‚ã«å‘¼ã³å‡ºã•ã‚Œã¾ã™ã€‚
      * @param resource $resource
      */
     function onData($resource);
 
     /**
-     * ƒT[ƒo‚Æ‚È‚é resource ‚ğ•Ô‚µ‚Ü‚·B
+     * ã‚µãƒ¼ãƒã¨ãªã‚‹ resource ã‚’è¿”ã—ã¾ã™ã€‚
      * @return resource resource
      */
     function getServerSocket();
 
     /**
-     * ƒNƒ‰ƒCƒAƒ“ƒg‚Æ‚Ì’[“_‚Æ‚È‚é resource ‚Ì”z—ñ‚ğ•Ô‚µ‚Ü‚·B
+     * ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¨ã®ç«¯ç‚¹ã¨ãªã‚‹ resource ã®é…åˆ—ã‚’è¿”ã—ã¾ã™ã€‚
      * @return array resources
      */
     function getSockets();

@@ -3,6 +3,6 @@
 namespace phozzil\lang;
 
 /**
- * �s�K�؂Ȉ��������\�b�h�ɓn�����ꍇ�ɓ��������O�ł��B
+ * 不適切な引数をメソッドに渡した場合に投げられる例外です。
  */
 class IllegalArgumentException extends PhozzilException {}

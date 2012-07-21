@@ -7,7 +7,7 @@ use phozzil\io\IOException;
 use phozzil\net\MultiServerListener;
 
 /**
- * MultiServer ‚ª•K—v‚Æ‚·‚é Listener ƒCƒ“ƒ^ƒtƒF[ƒX‚Ì‹ó‚ÌÀ‘•‚ğ‚Â’ŠÛƒNƒ‰ƒX‚Å‚·B
+ * MultiServer ãŒå¿…è¦ã¨ã™ã‚‹ Listener ã‚¤ãƒ³ã‚¿ãƒ•ã‚§ãƒ¼ã‚¹ã®ç©ºã®å®Ÿè£…ã‚’æŒã¤æŠ½è±¡ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
  */
 abstract class MultiServerAdapter implements MultiServerListener
 {
@@ -15,9 +15,9 @@ abstract class MultiServerAdapter implements MultiServerListener
     private $sockets; // resource[]
 
     /**
-     * MultiServer ‚ªˆ—‚·‚éƒnƒ“ƒhƒ‰ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚µ‚Ü‚·B
-     * @param int $port ‘Ò‚¿ó‚¯‚éƒ|[ƒg”Ô†
-     * @throws IOException “à•”‚Ìƒ\ƒPƒbƒgƒŠƒ\[ƒX‚ªŠm•Û‚Å‚«‚È‚©‚Á‚½ê‡
+     * MultiServer ãŒå‡¦ç†ã™ã‚‹ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã—ã¾ã™ã€‚
+     * @param int $port å¾…ã¡å—ã‘ã‚‹ãƒãƒ¼ãƒˆç•ªå·
+     * @throws IOException å†…éƒ¨ã®ã‚½ã‚±ãƒƒãƒˆãƒªã‚½ãƒ¼ã‚¹ãŒç¢ºä¿ã§ããªã‹ã£ãŸå ´åˆ
      */
     public function __construct($port)
     {
@@ -30,13 +30,13 @@ abstract class MultiServerAdapter implements MultiServerListener
     }
 
     /**
-     * ‚±‚ÌÀ‘•‚Å‚Í‰½‚à‚µ‚Ü‚¹‚ñB
+     * ã“ã®å®Ÿè£…ã§ã¯ä½•ã‚‚ã—ã¾ã›ã‚“ã€‚
      * @see phozzil\net\MultiServerListener::onConnect()
      */
     public function onConnect($resource) {}
 
     /**
-     * ‚±‚ÌÀ‘•‚Å‚Í‰½‚à‚µ‚Ü‚¹‚ñB
+     * ã“ã®å®Ÿè£…ã§ã¯ä½•ã‚‚ã—ã¾ã›ã‚“ã€‚
      * @see phozzil\net\MultiServerListener::onData()
      */
     public function onData($resource) {}

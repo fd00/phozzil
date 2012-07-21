@@ -37,4 +37,15 @@ class MultiServerTest extends PHPUnit_Framework_TestCase
     {
         $this->instance->setTimeout($timeout);
     }
+
+    /**
+     * @test
+     * @expectedException phozzil\lang\IllegalArgumentException
+     */
+    public function addListenerThrowsException()
+    {
+        $listener = $this->getMock('phozzil\net\MultiServerListener');
+        $this->instance->addListener($listener);
+        $this->instance->addListener($listener);
+    }
 }

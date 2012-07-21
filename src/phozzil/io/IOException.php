@@ -5,6 +5,6 @@ namespace phozzil\io;
 use phozzil\lang\PhozzilException;
 
 /**
- * ���炩�̓��o�͏����ɂ����ė�O�����������ꍇ�ɓ��������O�ł��B
+ * 何らかの入出力処理において例外が発生した場合に投げられる例外です。
  */
 class IOException extends PhozzilException {}

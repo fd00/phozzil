@@ -6,27 +6,32 @@ use phozzil\lang\IllegalArgumentException;
 use phozzil\io\IOException;
 
 /**
- * •¡”‚Ì port ‚Å‘Ò‚¿ó‚¯‚é‚±‚Æ‚Ì‚Å‚«‚éƒT[ƒoƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ğÀ‘•‚·‚é‚½‚ß‚ÌƒNƒ‰ƒX‚Å‚·B
+ * è¤‡æ•°ã® port ã§å¾…ã¡å—ã‘ã‚‹ã“ã¨ã®ã§ãã‚‹ã‚µãƒ¼ãƒã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å®Ÿè£…ã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
  */
 class MultiServer
 {
+    /**
+     * @var int ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã®åˆæœŸè¨­å®šæ™‚é–“
+     */
+    const DEFAULT_TIMEOUT = 200000;
+
     private $listeners; // MultiServerListener[]
     private $timeout;   // integer
 
     /**
-     * ƒT[ƒoƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚µ‚Ü‚·B
-     * @param int $timeout ƒ^ƒCƒ€ƒAƒEƒg‚ÌŠÔ (ƒ}ƒCƒNƒ•b)
+     * ã‚µãƒ¼ãƒã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã—ã¾ã™ã€‚
+     * @param int $timeout ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã®æ™‚é–“ (ãƒã‚¤ã‚¯ãƒ­ç§’)
      */
-    public function __construct($timeout = 1000)
+    public function __construct($timeout = self::DEFAULT_TIMEOUT)
     {
         $this->listeners = array();
         $this->setTimeout($timeout);
     }
 
     /**
-     * ‘Ò‚¿ó‚¯‚é port ‚Æƒnƒ“ƒhƒ‰‚ğÀ‘•‚µ‚½ƒŠƒXƒi[‚ğ’Ç‰Á‚µ‚Ü‚·B
-     * @param MultiServerListener $listener ƒŠƒXƒi[ƒCƒ“ƒXƒ^ƒ“ƒX
-     * @throws IllegalArgumentException “o˜^Ï‚İ‚ÌƒŠƒXƒi[‚ğw’è‚µ‚½ê‡
+     * å¾…ã¡å—ã‘ã‚‹ port ã¨ãƒãƒ³ãƒ‰ãƒ©ã‚’å®Ÿè£…ã—ãŸãƒªã‚¹ãƒŠãƒ¼ã‚’è¿½åŠ ã—ã¾ã™ã€‚
+     * @param MultiServerListener $listener ãƒªã‚¹ãƒŠãƒ¼ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
+     * @throws IllegalArgumentException ç™»éŒ²æ¸ˆã¿ã®ãƒªã‚¹ãƒŠãƒ¼ã‚’æŒ‡å®šã—ãŸå ´åˆ
      */
     public function addListener(MultiServerListener $listener)
     {
@@ -38,11 +43,13 @@ class MultiServer
     }
 
     /**
-     * ‘Ò‚¿ó‚¯ˆ—ˆê‰ñ‚ ‚½‚è‚Ì§ŒÀŠÔ‚ğİ’è‚µ‚Ü‚·B
-     * @param int $timeout ƒ^ƒCƒ€ƒAƒEƒg‚ÌŠÔ (ƒ}ƒCƒNƒ•b)
-     * @throws IllegalArgumentException ®”Œ^ˆÈŠO‚Ü‚½‚Í•‰‚Ì®”‚ğ“n‚µ‚½ê‡
+     * å¾…ã¡å—ã‘å‡¦ç†ä¸€å›ã‚ãŸã‚Šã®åˆ¶é™æ™‚é–“ã‚’è¨­å®šã—ã¾ã™ã€‚
+     * å¼•æ•°ã‚’çœç•¥ã—ãŸå ´åˆã¯åˆæœŸè¨­å®šæ™‚é–“ã¨ãªã‚Šã¾ã™ã€‚
+     * @param int $timeout ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã®æ™‚é–“ (ãƒã‚¤ã‚¯ãƒ­ç§’)
+     * @throws IllegalArgumentException æ•´æ•°å‹ä»¥å¤–ã¾ãŸã¯è² ã®æ•´æ•°ã‚’æ¸¡ã—ãŸå ´åˆ
+     * @see self::DEFAULT_TIMEOUT
      */
-    public function setTimeout($timeout)
+    public function setTimeout($timeout = self::DEFAULT_TIMEOUT)
     {
         if (!is_int($timeout)) {
             throw new IllegalArgumentException('timeout must be integer');
@@ -54,24 +61,24 @@ class MultiServer
     }
 
     /**
-     * ‘Ò‚¿ó‚¯‚éƒ‹[ƒv‚É“ü‚è‚Ü‚·B
-     * @throws IOException ‘Ò‚¿ó‚¯ˆ—’†‚É‰½‚©‚µ‚ç‚Ì—áŠO‚ª”­¶‚µ‚½ê‡
+     * å¾…ã¡å—ã‘ã‚‹ãƒ«ãƒ¼ãƒ—ã«å…¥ã‚Šã¾ã™ã€‚
+     * @throws IOException å¾…ã¡å—ã‘å‡¦ç†ä¸­ã«ä½•ã‹ã—ã‚‰ã®ä¾‹å¤–ãŒç™ºç”Ÿã—ãŸå ´åˆ
      */
     public function start()
     {
         while (true) {
             $observedSockets = array();   // resource[]
-            $associatedListers = array(); // Map<resource, function>
+            $associatedListeners = array(); // Map<resource, function>
             foreach ($this->listeners as $listener) {
                 $server = $listener->getServerSocket();
                 $observedSockets[] = $server;
-                $associatedListers[(integer)$server] = function($resource) use($listener)
+                $associatedListeners[(integer)$server] = function($resource) use($listener)
                 {
                     $listener->onConnect($resource);
                 };
                 foreach ($listener->getSockets() as $socket) {
                     $observedSockets[] = $socket;
-                    $associatedListers[(integer)$socket] = function($resource) use($listener)
+                    $associatedListeners[(integer)$socket] = function($resource) use($listener)
                     {
                         $listener->onData($resource);
                     };
@@ -82,7 +89,7 @@ class MultiServer
                 throw new IOException('stream_select failed');
             }
             foreach ($observedSockets as $observedSocket) {
-                $associatedListers[(integer)$observedSocket]($observedSocket);
+                $associatedListeners[(integer)$observedSocket]($observedSocket);
             }
         }
     }
