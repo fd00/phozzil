@@ -12,6 +12,10 @@ trait FileCloseable
      */
     private $resource;
 
+    /**
+     * ファイルリソースを解放します。
+     * @throws IOException ファイルリソースの解放に失敗した場合
+     */
     public function close()
     {
         $result = fclose($this->resource);

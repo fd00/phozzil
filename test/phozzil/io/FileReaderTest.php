@@ -1,9 +1,18 @@
 <?php
 
 use phozzil\io\FileReader;
+use phozzil\io\FileSystem;
 
 class FileReaderTest extends \PHPUnit_Framework_TestCase
 {
+    static private $fixture;
+
+    static public function setUpBeforeClass()
+    {
+        self::$fixture = FileSystem::createTemporaryFile();
+        file_put_contents(self::$fixture, 'Hello, world!' . PHP_EOL . 'Good-bye, world!' . PHP_EOL);
+    }
+
     static public function setFileReaderThrowsFileNotFoundExceptionProvider()
     {
         return array(
@@ -28,15 +37,9 @@ class FileReaderTest extends \PHPUnit_Framework_TestCase
      */
     public function FileReaderThrowsIOException()
     {
-        $tmpfile = tempnam(sys_get_temp_dir(), '');
+        $tmpfile = FileSystem::createTemporaryFile();
         chmod($tmpfile, 0);
         new FileReader($tmpfile);
-        unlink($tmpfile);
-    }
-
-    static private function getFixture()
-    {
-        return __DIR__ . DIRECTORY_SEPARATOR . 'fixture' . DIRECTORY_SEPARATOR . 'FileReader.read.txt';
     }
 
     /**
@@ -44,7 +47,7 @@ class FileReaderTest extends \PHPUnit_Framework_TestCase
      */
     public function read()
     {
-        $reader = new FileReader(self::getFixture());
+        $reader = new FileReader(self::$fixture);
         $this->assertSame('Hello', $reader->read(5));
         $this->assertSame(', world!' . PHP_EOL . 'Good-bye, world!' . PHP_EOL, $reader->read());
         $this->assertSame('', $reader->read());
@@ -54,9 +57,9 @@ class FileReaderTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function readAfterClosing()
+    public function close()
     {
-        $reader = new FileReader(self::getFixture());
+        $reader = new FileReader(self::$fixture);
         $reader->close();
         $this->assertTrue(true);
     }
@@ -66,7 +69,7 @@ class FileReaderTest extends \PHPUnit_Framework_TestCase
      */
     public function skip()
     {
-        $reader = new FileReader(self::getFixture());
+        $reader = new FileReader(self::$fixture);
         $this->assertSame(5, $reader->skip(5));
         $this->assertSame(', world!', $reader->read(8));
         $this->assertSame(18, $reader->skip(100));
@@ -87,7 +90,7 @@ class FileReaderTest extends \PHPUnit_Framework_TestCase
      */
     public function skipThrowsIllegalArgumentException($length)
     {
-        $reader = new FileReader(self::getFixture());
+        $reader = new FileReader(self::$fixture);
         $reader->skip($length);
     }
 }

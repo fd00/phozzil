@@ -8,6 +8,11 @@ namespace phozzil\io;
 class Endianness
 {
     /**
+     * @var int 不明なエンディアン
+     */
+    const UNKNOWN_ENDIAN = 0;
+
+    /**
      * @var int リトルエンディアン
      */
     const LITTLE_ENDIAN = 1;
@@ -23,12 +28,12 @@ class Endianness
     private function __construct() {}
 
     /**
-     * PHP が起動しているマシンのエンディアンを取得します。
-     * @return int PHP が起動しているマシンのエンディアン
+     * 処理系のエンディアンを取得します。
+     * @return int 処理系のエンディアン
      */
     static public function getMachineEndianness()
     {
-        list(,$word) = unpack('l*', "\x01\x00\x00\x00");
+        list( ,$word) = unpack('l*', "\x01\x00\x00\x00");
         return $word === 1 ? self::LITTLE_ENDIAN : self::BIG_ENDIAN;
     }
 }
