@@ -15,7 +15,6 @@ class EndiannessTest extends \PHPUnit_Framework_TestCase
         } else if ($processorName === 'x86_64') {
             return Endianness::LITTLE_ENDIAN;
         }
-
         return null;
     }
 

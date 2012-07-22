@@ -9,18 +9,18 @@ interface MultiServerListener
 {
     /**
      * 接続された時に呼び出されます。
-     * @param resource $resource
+     * @param resource $resource 接続を確立したソケットリソース
      */
     function onConnect($resource);
 
     /**
      * データを受信した時に呼び出されます。
-     * @param resource $resource
+     * @param resource $resource データを受信したソケットリソース
      */
     function onData($resource);
 
     /**
-     * サーバとなる resource を返します。
+     * 待ち受けサーバとなる resource を返します。
      * @return resource resource
      */
     function getServerSocket();

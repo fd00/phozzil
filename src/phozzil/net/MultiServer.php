@@ -51,7 +51,6 @@ class MultiServer
      * 引数を省略した場合は初期設定時間となります。
      * @param int $timeout タイムアウトの時間 (マイクロ秒)
      * @throws IllegalArgumentException 整数型以外または負の整数を渡した場合
-     * @see self::DEFAULT_TIMEOUT
      */
     public function setTimeout($timeout = self::DEFAULT_TIMEOUT)
     {
@@ -59,7 +58,7 @@ class MultiServer
             throw new IllegalArgumentException('timeout must be integer');
         }
         if ($timeout <= 0) {
-            throw new IllegalArgumentException('timeout > 0');
+            throw new IllegalArgumentException('timeout must be greater than 0');
         }
         $this->timeout = $timeout;
     }
