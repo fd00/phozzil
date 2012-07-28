@@ -30,4 +30,9 @@ class FileWriter extends Writer
     {
         fwrite($this->resource, $data);
     }
+
+    public function flush()
+    {
+        fflush($this->resource);
+    }
 }
