@@ -15,7 +15,9 @@ final class FileSystem
     /**
      * インスタンス化できません。
      */
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     /**
      * 一意なファイル名を生成します。

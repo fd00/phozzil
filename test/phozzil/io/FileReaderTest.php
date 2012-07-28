@@ -80,7 +80,7 @@ class FileReaderTest extends \PHPUnit_Framework_TestCase
         return array(
                         array('NotInteger'),
                         array(-1024),
-                        );
+        );
     }
 
     /**

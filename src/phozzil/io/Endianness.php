@@ -4,6 +4,7 @@ namespace phozzil\io;
 
 /**
  * エンディアンを表現する列挙型です。
+ * @todo Enum にしたい
  */
 class Endianness
 {
