@@ -2,6 +2,8 @@
 
 namespace phozzil\util;
 
+use phozzil\lang\IllegalArgumentException;
+
 /**
  * オブジェクトをキーとする値へのマップを表現するクラスです。
  *
@@ -25,6 +27,9 @@ class Map implements \ArrayAccess, \Countable, KeyValueIteratable
 
     public function each($function)
     {
+        if (!is_callable($function)) {
+            throw new IllegalArgumentException('function must be callable');
+        }
         foreach ($this->instance as $index => $key) {
             $function($key, $this->instance[$key]);
         }

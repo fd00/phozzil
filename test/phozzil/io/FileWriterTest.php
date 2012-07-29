@@ -1,7 +1,6 @@
 <?php
 
 use phozzil\io\FileSystem;
-
 use phozzil\io\FileWriter;
 
 class FileWriterTest extends PHPUnit_Framework_TestCase

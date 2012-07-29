@@ -40,4 +40,14 @@ class MapTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($k1, $flipped['v1']);
         $this->assertSame($k2, $flipped['v2']);
     }
+
+    /**
+     * @test
+     * @expectedException phozzil\lang\IllegalArgumentException
+     */
+    public function eachThrowIllegalArgumentException()
+    {
+        $instance = new Map();
+        $instance->each(null);
+    }
 }

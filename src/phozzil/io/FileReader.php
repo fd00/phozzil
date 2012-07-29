@@ -2,6 +2,8 @@
 
 namespace phozzil\io;
 
+use phozzil\lang\IllegalArgumentException;
+
 use phozzil\io\Reader;
 
 /**
@@ -40,5 +42,20 @@ class FileReader extends Reader
             $result = fread($this->resource, $length);
         }
         return $result;
+    }
+
+    /**
+     * ファイルから一行毎に文字列として読み込み、指定された関数の引数に渡して実行します。
+     * このメソッドは EOF に到達した後に close() を呼び出します。
+     * @param callback $function function(string)
+     */
+    public function each($function)
+    {
+        if (!is_callable($function)) {
+            throw new IllegalArgumentException('function must be callable');
+        }
+        while (($line = fgets($this->resource)) !== false) {
+            $function($line);
+        }
     }
 }

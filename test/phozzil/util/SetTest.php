@@ -32,4 +32,15 @@ class SetTest extends PHPUnit_Framework_TestCase
         $this->assertSame($object1, $flipped[spl_object_hash($object1)]);
         $this->assertSame($object2, $flipped[spl_object_hash($object2)]);
     }
+
+
+    /**
+     * @test
+     * @expectedException phozzil\lang\IllegalArgumentException
+     */
+    public function eachThrowIllegalArgumentException()
+    {
+        $instance = new Set();
+        $instance->each(null);
+    }
 }

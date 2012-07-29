@@ -93,4 +93,30 @@ class FileReaderTest extends \PHPUnit_Framework_TestCase
         $reader = new FileReader(self::$fixture);
         $reader->skip($length);
     }
+
+    /**
+     * @test
+     */
+    public function each()
+    {
+        $actuals = array();
+        $reader = new FileReader(self::$fixture);
+        $reader->each(function($line) use(&$actuals)
+        {
+            $actuals[] = $line;
+        });
+        $this->assertSame(2, count($actuals));
+        $this->assertSame('Hello, world!' . PHP_EOL, $actuals[0]);
+        $this->assertSame('Good-bye, world!' . PHP_EOL, $actuals[1]);
+    }
+
+    /**
+     * @test
+     * @expectedException phozzil\lang\IllegalArgumentException
+     */
+    public function eachThrowsIllegalArgumentException()
+    {
+        $reader = new FileReader(self::$fixture);
+        $reader->each(null);
+    }
 }

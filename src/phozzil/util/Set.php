@@ -2,6 +2,8 @@
 
 namespace phozzil\util;
 
+use phozzil\lang\IllegalArgumentException;
+
 /**
  * オブジェクトの集合を表現するクラスです。
  *
@@ -53,6 +55,9 @@ class Set implements \Countable, Iteratable
 
     public function each($function)
     {
+        if (!is_callable($function)) {
+            throw new IllegalArgumentException('function must be callable');
+        }
         foreach ($this->instance as $value) {
             $function($value);
         }
