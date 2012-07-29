@@ -8,7 +8,7 @@ namespace phozzil\util;
  * SplObjectStorage の集合としてのインタフェースだけを定義したラッパーとして実装されています。
  * @see \SplObjectStorage
  */
-class Set implements \Countable, \Iterator
+class Set implements \Countable, Iteratable
 {
     /**
      * @var \SplObjectStorage
@@ -51,33 +51,15 @@ class Set implements \Countable, \Iterator
         $this->instance->detach($object);
     }
 
+    public function each($function)
+    {
+        foreach ($this->instance as $value) {
+            $function($value);
+        }
+    }
+
     public function count()
     {
         return $this->instance->count();
-    }
-
-    public function current()
-    {
-        return $this->instance->current();
-    }
-
-    public function key()
-    {
-        return $this->instance->key();
-    }
-
-    public function next()
-    {
-        $this->instance->next();
-    }
-
-    public function rewind()
-    {
-        $this->instance->rewind();
-    }
-
-    public function valid()
-    {
-        return $this->instance->valid();
     }
 }

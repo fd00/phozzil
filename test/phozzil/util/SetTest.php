@@ -23,9 +23,11 @@ class SetTest extends PHPUnit_Framework_TestCase
         $this->assertSame(2, count($instance));
 
         $flipped = array();
-        foreach ($instance as $object) {
-            $flipped[spl_object_hash($object)] = $object;
-        }
+        $instance->each(function($value) use(&$flipped)
+        {
+            $flipped[spl_object_hash($value)] = $value;
+        });
+
         $this->assertSame(2, count($flipped));
         $this->assertSame($object1, $flipped[spl_object_hash($object1)]);
         $this->assertSame($object2, $flipped[spl_object_hash($object2)]);

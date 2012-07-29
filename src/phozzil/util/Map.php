@@ -8,7 +8,7 @@ namespace phozzil\util;
  * SplObjectStorage のマップとしてのインタフェースだけを定義したラッパーとして実装されています。
  * @see \SplObjectStorage
  */
-class Map implements \ArrayAccess, \Countable
+class Map implements \ArrayAccess, \Countable, KeyValueIteratable
 {
     /**
      * @var \SplObjectStorage
@@ -23,12 +23,6 @@ class Map implements \ArrayAccess, \Countable
         $this->instance = new \SplObjectStorage();
     }
 
-    /**
-     * foreach の代替メソッドです。
-     *
-     * (foreach は key に object を指定するような再定義ができないため)
-     * @param callback $function function(key, value)
-     */
     public function each($function)
     {
         foreach ($this->instance as $index => $key) {
