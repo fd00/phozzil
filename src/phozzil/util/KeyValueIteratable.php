@@ -11,7 +11,7 @@ interface KeyValueIteratable
      * foreach の代替メソッドです。
      *
      * (foreach は key に object を指定するような再定義ができないため)
-     * @param callback $function function(key, value)
+     * @param callback $function function(object, mixed)
      */
     function each($function);
 }

@@ -2,9 +2,8 @@
 
 namespace phozzil\io;
 
-use phozzil\lang\IllegalArgumentException;
-
 use phozzil\io\Reader;
+use phozzil\lang\IllegalArgumentException;
 
 /**
  * ファイルからの入力ストリームを表現するクラスです。
@@ -46,7 +45,6 @@ class FileReader extends Reader
 
     /**
      * ファイルから一行毎に文字列として読み込み、指定された関数の引数に渡して実行します。
-     * このメソッドは EOF に到達した後に close() を呼び出します。
      * @param callback $function function(string)
      */
     public function each($function)
