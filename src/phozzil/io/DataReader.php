@@ -3,7 +3,6 @@
 namespace phozzil\io;
 
 use phozzil\io\FilterReader;
-use phozzil\lang\IllegalArgumentException;
 
 /**
  * バイトストリームからプリミティブなデータを読み出すための入力フィルタです。
@@ -19,11 +18,10 @@ class DataReader extends FilterReader
      * 指定されたエンディアンに基づく入力フィルタをインスタンス化します。
      *
      * エンディアンが指定されなかった場合は処理系のエンディアンを判定して設定します。
-     * @param Reader $reader 読み出し元となる
+     * @param Reader $reader 読み出し元となる Reader
      * @param Endianness $endianness バイトストリームのエンディアン
-     * @throws IllegalArgumentException
      */
-    public function __construct($reader, $endianness = Endianness::UNKNOWN_ENDIAN)
+    public function __construct(Reader $reader, $endianness = Endianness::UNKNOWN_ENDIAN)
     {
         if ($endianness === Endianness::UNKNOWN_ENDIAN) {
             $endianness = Endianness::getMachineEndianness();

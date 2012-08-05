@@ -72,7 +72,7 @@ class DataReaderTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function testReadUnsignedShortOnBigEndian()
+    public function readUnsignedShortOnBigEndian()
     {
         $fileName = FileSystem::createTemporaryFile();
         file_put_contents($fileName, pack('n', 0), FILE_APPEND);

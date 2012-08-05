@@ -9,6 +9,7 @@ namespace phozzil\io;
 class Endianness
 {
     /**
+     * @internal
      * @var int 不明なエンディアン
      */
     const UNKNOWN_ENDIAN = 0;
