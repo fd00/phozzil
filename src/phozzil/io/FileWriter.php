@@ -10,6 +10,8 @@ use phozzil\io\Writer;
 class FileWriter extends Writer
 {
     use FileCloseable;
+    use FileWriteable;
+    use FileFlushable;
 
     /**
      * 指定されたファイルへの出力ストリームをインスタンス化します。
@@ -24,15 +26,5 @@ class FileWriter extends Writer
             throw new IOException($fileName);
         }
         $this->resource = $resource;
-    }
-
-    public function write($data)
-    {
-        fwrite($this->resource, $data);
-    }
-
-    public function flush()
-    {
-        fflush($this->resource);
     }
 }

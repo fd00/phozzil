@@ -11,6 +11,7 @@ use phozzil\lang\IllegalArgumentException;
 class FileReader extends Reader
 {
     use FileCloseable;
+    use FileReadable;
 
     /**
      * 指定されたファイルからの入力ストリームをインスタンス化します。
@@ -28,19 +29,6 @@ class FileReader extends Reader
             throw new IOException('fopen failed');
         }
         $this->resource = $resource;
-    }
-
-    public function read($length = null)
-    {
-        if (is_null($length)) {
-            $result = '';
-            while (!feof($this->resource)) {
-                $result .= fread($this->resource, 8192);
-            }
-        } else {
-            $result = fread($this->resource, $length);
-        }
-        return $result;
     }
 
     /**
