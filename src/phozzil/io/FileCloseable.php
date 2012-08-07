@@ -18,9 +18,11 @@ trait FileCloseable
      */
     public function close()
     {
-        $result = fclose($this->resource);
-        if (!$result) {
-            throw new IOException('close failed');
+        if (is_resource($this->resource)) {
+            $result = fclose($this->resource);
+            if (!$result) {
+                throw new IOException('close failed');
+            }
         }
     }
 }
