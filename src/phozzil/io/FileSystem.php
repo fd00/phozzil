@@ -7,6 +7,8 @@ namespace phozzil\io;
  */
 final class FileSystem
 {
+    static private $temporaryRoot = null;
+
     /**
      * @var array 処理系終了時に削除されるパスのリスト
      */
@@ -20,14 +22,31 @@ final class FileSystem
     }
 
     /**
+     * プロセスがテンポラリとして使用可能なディレクトリを返します。
+     * @todo もっといいディレクトリ名生成ルールがあるかもしれない
+     * @return string プロセスがテンポラリとして使用可能なディレクトリ
+     */
+    static public function getTemporaryRoot()
+    {
+        if (is_null(self::$temporaryRoot)) {
+            $unique = md5(getmypid() . microtime());
+            self::$temporaryRoot = self::join(sys_get_temp_dir(), $unique);
+            mkdir(self::$temporaryRoot);
+            self::deleteOnExit(self::$temporaryRoot);
+        }
+        return self::$temporaryRoot;
+    }
+
+    /**
      * 一意なファイル名を生成します。
      *
      * パーミッションは 600 です。
+     * @return string 一意なファイル名
      * @throws IOException 一時ファイルの生成に失敗した場合
      */
     static public function createTemporaryFile()
     {
-        $result = tempnam(sys_get_temp_dir(), '');
+        $result = tempnam(self::getTemporaryRoot(), '');
         if ($result === false) {
             throw new IOException('createTemporaryFile failed');
         }
